@@ -18,9 +18,7 @@ app.get("/:seccion?", (req, res) => {
 
     const vista = seccion || "home"
 
-    const titulo = seccion.charAt(0).toUpperCase() + seccion.slice(1)
-
-    console.log(titulo)
+    const titulo = vista.charAt(0).toUpperCase() + vista.slice(1)
 
     res.render(vista, {titulo})
 })
