@@ -12,9 +12,15 @@ app.listen(2000)
 
 app.use( express.static("public") )
 
-app.get("/:seccion", (req, res) => {
+app.get("/:seccion?", (req, res) => {
 
     const { seccion } = req.params
 
-    res.render("home")
+    const vista = seccion || "home"
+
+    const titulo = seccion.charAt(0).toUpperCase() + seccion.slice(1)
+
+    console.log(titulo)
+
+    res.render(vista, {titulo})
 })
