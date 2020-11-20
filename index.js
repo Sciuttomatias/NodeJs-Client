@@ -16,6 +16,11 @@ app.listen(2000)
 
 app.use( express.static("public") )
 
+app.get("favicon.ico", (req, res) => {
+    res.writeHead(404, { "Content-Type" : "text/plain" })
+    res.end("favicon eliminado!!")
+})
+
 
 
 app.get("/test", async (req, res) => {
@@ -27,6 +32,15 @@ app.get("/test", async (req, res) => {
     res.end("Mira la consola si hay datos de la API")
 })
 
+app.get("/panel", async (req, res) => {
+
+    const { data : peliculas } = await axios.get("http://localhost:1000/api/v1/pelicula")
+
+    console.table(peliculas)
+
+    res.render("panel", { titulo : "Catálogo de Películas", peliculas })
+
+})
 
 
 app.get("/:seccion?", (req, res) => {
